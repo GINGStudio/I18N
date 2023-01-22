@@ -10,16 +10,10 @@ namespace GINGStudio.I18N
         private T Value;
         private string _path;
         private ISerialisation<T> _serialisation;
-        private string Extension;
-
-        private string GetSystemLanguage()
-        {
-            return System.Globalization.CultureInfo.CurrentCulture.Name;
-        }
-
+        
         private string GetLangPath()
         {
-            return Path.Join(_path, CurrentLang + Extension);
+            return Path.Join(_path, CurrentLang + _serialisation.Extension());
         }
 
         private bool LoadLanguage()
@@ -33,8 +27,10 @@ namespace GINGStudio.I18N
             return true;
         }
 
-        private void SetLanguage(string lang)
+        private void SetLanguage(string lang = "")
         {
+            if (lang = "") lang = SysInfo.Language;
+
             if (_currentLang == lang) return;
             _currentLang = lang;
             LoadLanguage();
@@ -44,14 +40,10 @@ namespace GINGStudio.I18N
         {
             get
             {
-                if (_currentLang == null)
-                {
-                    _currentLang = GetSystemLanguage();
-                }
-
+                if (string.IsNullOrEmpty(_currentLang)) SetLanguage();
                 return _currentLang;
             }
-            set { }
+            set => SetLanguage(value);
         }
 
 

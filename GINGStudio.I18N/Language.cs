@@ -21,21 +21,16 @@ namespace GINGStudio.I18N
         {
             return Path.Join(_path, CurrentLang + Extension);
         }
-        
-        private void LoadLanguage()
+
+        private bool LoadLanguage()
         {
-            lock (Value)
-            {
-                var path = GetLangPath();
-                if (File.Exists(path))
-                {
-                    Value = _serialisation.Serialise(File.ReadAllText(path));
-                }
-                else
-                {
-                    throw new FileNotFoundException("Language file not found", path);
-                }
-            }
+            var path = GetLangPath();
+            if (!File.Exists(path)) return false;
+            var (ok, value) = _serialisation.Serialise(File.ReadAllText(path));
+            if (!ok) return false;
+
+            Value = value;
+            return true;
         }
 
         private void SetLanguage(string lang)
@@ -58,7 +53,7 @@ namespace GINGStudio.I18N
             }
             set { }
         }
-        
+
 
         public Language()
         {

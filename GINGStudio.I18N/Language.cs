@@ -26,10 +26,10 @@ namespace GINGStudio.I18N
         {
             var path = GetLangPath();
             if (!File.Exists(path)) return false;
-            var (ok, value) = _serialisation.Serialise(File.ReadAllText(path));
-            if (!ok) return false;
+            var rst = _serialisation.Serialise(File.ReadAllText(path));
+            if (!rst.Ok) return false;
 
-            Value = value;
+            Value = rst.Unwrap();
             return true;
         }
 

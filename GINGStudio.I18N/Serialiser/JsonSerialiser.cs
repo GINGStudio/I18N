@@ -1,18 +1,21 @@
 using System;
 using GINGStudio.I18N.Interface;
+using GINGStudio.I18N.Util;
 
 namespace GINGStudio.I18N.Serialiser
 {
     public class JsonSerialiser<T> : ISerialisation<T>
     {
-        public (bool Ok, T Value) Serialise(string s)
+        public Result<T> Serialise(string s)
         {
             try {
                 var t = System.Text.Json.JsonSerializer.Deserialize<T>(s);
-                return (t != null, t);
+                return t == null
+                    ? Result<T>.NewError("Null Value")
+                    : Result<T>.NewValue(t);
             } catch (Exception e)
             {
-                return (false, default);
+                return (Result<T>)e;
             }
         }
     }

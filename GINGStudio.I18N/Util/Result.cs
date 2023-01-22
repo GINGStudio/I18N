@@ -31,6 +31,13 @@ namespace GINGStudio.I18N.Util
             return _value;
         }
         
+        public T UnwrapOr(T value)
+        {
+            return Ok ? _value : value;
+        }
+
+        public Exception? Exception() => _exp;
+        
         public string Message() => Ok ? "Success" : _msg ?? _exp?.Message ?? "No Message";
         
         public static Result<T> NewError(Exception exp) => new Result<T>(exp);

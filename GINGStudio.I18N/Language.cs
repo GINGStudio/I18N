@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using GINGStudio.I18N.Interface;
+using GINGStudio.I18N.Util;
 
 namespace GINGStudio.I18N
 {
@@ -29,7 +30,7 @@ namespace GINGStudio.I18N
 
         private void SetLanguage(string lang = "")
         {
-            if (lang = "") lang = SysInfo.Language;
+            if (lang == "") lang = SysInfo.Language;
 
             if (_currentLang == lang) return;
             _currentLang = lang;

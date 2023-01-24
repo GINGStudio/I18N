@@ -1,15 +1,15 @@
-using System;
+﻿using System;
 using GINGStudio.I18N.Interface;
 using GINGStudio.I18N.Util;
 
-namespace GINGStudio.I18N.Serialiser
+namespace GINStudio.I18N.Serialiser.Json
 {
     public class JsonSerialiser<T> : ISerialisation<T>
     {
         public Result<T> Serialise(string s)
         {
             try {
-                var t = System.Text.Json.JsonSerializer.Deserialize<T>(s);
+                var t = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(s);
                 return t == null
                     ? Result<T>.NewError("Null Value")
                     : Result<T>.NewValue(t);
@@ -18,5 +18,7 @@ namespace GINGStudio.I18N.Serialiser
                 return (Result<T>)e;
             }
         }
+
+        public string Extension() => ".json";
     }
 }

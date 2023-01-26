@@ -5,9 +5,9 @@ namespace GINGStudio.I18N.Util
     public sealed class Result<T>
     {
         private readonly T _value;
-        private readonly string? _msg;
+        private readonly string _msg;
         public readonly bool Ok;
-        private readonly Exception? _exp;
+        private readonly Exception _exp;
         public Result(T value)
         {
             _value = value;
@@ -33,7 +33,7 @@ namespace GINGStudio.I18N.Util
         
         public T UnwrapOr(T value) => Ok ? _value : value;
 
-        public Exception? Exception => _exp;
+        public Exception Exception => _exp;
         
         public string Message => Ok ? "Success" : _msg ?? _exp?.Message ?? "No Message";
         

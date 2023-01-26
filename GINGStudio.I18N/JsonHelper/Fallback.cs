@@ -5,11 +5,13 @@ namespace GINGStudio.I18N
 {
     public partial class JsonHelper
     {
-        public static JObject Fallback(JObject master, JObject fallback, string[]? ignoreKeys = null)
+        public static JObject Fallback(JObject master, JObject fallback, string[] ignoreKeys = null)
         {
             var rst = master;
-            foreach (var (key, value) in fallback)
+            foreach (var kvp in fallback)
             {
+                var key = kvp.Key;
+                var value = kvp.Value;
                 if (value == null) continue;
                 if (ignoreKeys != null && ignoreKeys.Contains(key)) continue;
                 if (value.Type == JTokenType.Null || value.Type == JTokenType.Comment) continue;
@@ -44,12 +46,12 @@ namespace GINGStudio.I18N
             return rst;
         }
         
-        public static JObject Fallbacks(JObject master, params JObject?[] fallbacks)
+        public static JObject Fallbacks(JObject master, params JObject[] fallbacks)
         {
             return FallbacksWithIgnoreKeys(master, null, fallbacks);
         }
 
-        public static JObject FallbacksWithIgnoreKeys(JObject master, string[]? ignoreKeys, params JObject?[] fallbacks)
+        public static JObject FallbacksWithIgnoreKeys(JObject master, string[] ignoreKeys, params JObject[] fallbacks)
         {
             foreach (var fallback in fallbacks)
             {

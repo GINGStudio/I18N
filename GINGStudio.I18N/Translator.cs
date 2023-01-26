@@ -9,8 +9,8 @@ namespace GINGStudio.I18N
 {
     public class Translator<T> where T : class
     {
-        private string? _lang;
-        private T? _value;
+        private string _lang;
+        private T _value;
         private readonly string _path;
         private string _defaultLang = "";
         private readonly ConcurrentDictionary<string, T> _cache = new ConcurrentDictionary<string, T>();
@@ -32,9 +32,9 @@ namespace GINGStudio.I18N
         public string DefaultLang => _defaultLang;
 
         private string GetLangPath(string lang)
-            => Path.Join(_path, lang + ".json");
+            => Path.Combine(_path, lang + ".json");
 
-        private JObject? GetPlainLanguage(string? lang)
+        private JObject GetPlainLanguage(string lang)
         {
             if (lang == null) return null;
             if (_plainJObjectCache.ContainsKey(lang))
@@ -116,7 +116,7 @@ namespace GINGStudio.I18N
 
         private void LoadDefaultConfig()
         {
-            var defaultPath = Path.Join(_path, "default.json");
+            var defaultPath = Path.Combine(_path, "default.json");
             if (!File.Exists(defaultPath)) return;
             var dft = JsonHelper.DeserialiseTo<Default>(File.ReadAllText(defaultPath));
             if (!dft.Ok) return;

@@ -11,7 +11,7 @@ namespace GINGStudio.I18N.Util
         /// </summary>
         /// <param name="lang"></param>
         /// <returns>if is null then not valid!</returns>
-        internal static string? ParseToLanguage(string lang)
+        internal static string ParseToLanguage(string lang)
         {
             try
             {

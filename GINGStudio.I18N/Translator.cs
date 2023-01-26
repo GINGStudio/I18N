@@ -1,5 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using System.IO;
 using System.Linq;
 using GINGStudio.I18N.Model;
 using GINGStudio.I18N.Util;
@@ -11,7 +10,7 @@ namespace GINGStudio.I18N
     {
         private string _lang;
         private T _value;
-        private readonly string _path;
+        private ISource _source;
         private string _defaultLang = "";
         private readonly ConcurrentDictionary<string, T> _cache = new ConcurrentDictionary<string, T>();
 
@@ -27,21 +26,18 @@ namespace GINGStudio.I18N
 
         private readonly ConcurrentDictionary<string, JObject> _plainJObjectCache =
             new ConcurrentDictionary<string, JObject>();
-        
+
         public bool HasDefaultLang => _defaultLang != "";
         public string DefaultLang => _defaultLang;
-
-        private string GetLangPath(string lang)
-            => Path.Combine(_path, lang + ".json");
 
         private JObject GetPlainLanguage(string lang)
         {
             if (lang == null) return null;
             if (_plainJObjectCache.ContainsKey(lang))
                 return _plainJObjectCache[lang];
-            var path = GetLangPath(lang);
-            if (!File.Exists(path)) return null;
-            var jo = JObject.Parse(File.ReadAllText(path));
+            var json = _source.GetLangJson(lang);
+            if (json == null) return null;
+            var jo = JObject.Parse(json);
             _plainJObjectCache.TryAdd(lang, jo);
             return jo;
         }
@@ -111,15 +107,21 @@ namespace GINGStudio.I18N
 
         public Translator(string path = "i18n")
         {
-            _path = path;
-           LoadDefaultConfig();
+            _source = new FileSource(path);
+            LoadDefaultConfig();
+        }
+        
+        public Translator(ISource source)
+        {
+            _source = source;
+            LoadDefaultConfig();
         }
 
         private void LoadDefaultConfig()
         {
-            var defaultPath = Path.Combine(_path, "default.json");
-            if (!File.Exists(defaultPath)) return;
-            var dft = JsonHelper.DeserialiseTo<Default>(File.ReadAllText(defaultPath));
+            var json = _source.GetLangJson("default");
+            if (json == null) return;
+            var dft = JsonHelper.DeserialiseTo<Default>(json);
             if (!dft.Ok) return;
             _defaultLang = dft.Unwrap().Language ?? "";
         }

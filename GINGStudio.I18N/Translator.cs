@@ -128,6 +128,12 @@ namespace GINGStudio.I18N
             _defaultLang = dft.Unwrap().Language ?? "";
         }
         
+        public void ClearCache()
+        {
+            _cache.Clear();
+            _plainJObjectCache.Clear();
+        }
+        
         public string[] SupportedLanguages => _source.SupportedLanguages;
     }
 }

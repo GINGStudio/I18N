@@ -27,7 +27,7 @@ Project File
 Model:
 
 ```csharp
-class LangModel
+class LangModel : GINGStudio.I18N.Model.LanguageModel // you can use not base LanguageModel if you want
 {
     public string Name { get; set; }
     public string Description { get; set; }

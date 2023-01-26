@@ -1,5 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.IO;
+using System.Linq;
+using GINGStudio.I18N.Model;
 using GINGStudio.I18N.Util;
 using Newtonsoft.Json.Linq;
 
@@ -11,7 +13,7 @@ namespace GINGStudio.I18N
         private T? _value;
         private readonly string _path;
         private readonly ConcurrentDictionary<string, T> _cache = new ConcurrentDictionary<string, T>();
-        
+
         private readonly ConcurrentDictionary<string, JObject> _plainJObjectCache =
             new ConcurrentDictionary<string, JObject>();
 
@@ -29,6 +31,22 @@ namespace GINGStudio.I18N
             return jo;
         }
 
+        private readonly string[] _jsonKeywords = { "_config" };
+
+        private JObject ApplyConfig(JObject jo)
+        {
+            var cfgToken = jo["_config"];
+            if (cfgToken == null) return jo;
+            var cfgJo = cfgToken as JObject;
+            if (cfgJo == null) return jo;
+            var cfgRst = JsonHelper.DeserialiseTo<Configure>(cfgJo);
+            if (!cfgRst.Ok) return jo;
+            var cfg = cfgRst.Unwrap();
+            if (cfg.Fallback == null || cfg.Fallback.Length == 0) return jo;
+            return JsonHelper.FallbacksWithIgnoreKeys(jo, _jsonKeywords,
+                _jsonKeywords.Select(GetPlainLanguage).ToArray());
+        }
+
         private bool LoadLanguage()
         {
             var lang = Language;
@@ -40,7 +58,8 @@ namespace GINGStudio.I18N
 
             var langJo = GetPlainLanguage(lang);
             if (langJo == null) return false;
-            
+            langJo = ApplyConfig(langJo);
+
             var rst = JsonHelper.DeserialiseTo<T>(langJo);
             if (!rst.Ok) return false;
 

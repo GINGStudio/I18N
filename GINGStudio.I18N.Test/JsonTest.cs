@@ -1,4 +1,5 @@
 using GINGStudio.I18N.Model;
+using GINGStudio.I18N.Util;
 using Newtonsoft.Json;
 
 namespace GINGStudio.I18N.Test;
@@ -74,5 +75,11 @@ public class JsonTest
         Assert.AreEqual(2, langs.Length);
         Assert.IsTrue(langs.Contains("zh-cn"));
         Assert.IsTrue(langs.Contains("en-gb"));
+        var vs = LangTools.GetLangPairs(langs);
+        foreach (var (k, v) in vs)
+        {
+            Console.WriteLine($"{k} => {v}");
+        }
+
     }
 }

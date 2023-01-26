@@ -43,8 +43,13 @@ namespace GINGStudio.I18N
 
             return rst;
         }
+        
+        public static JObject Fallbacks(JObject master, params JObject?[] fallbacks)
+        {
+            return FallbacksWithIgnoreKeys(master, null, fallbacks);
+        }
 
-        public static JObject Fallbacks(JObject master, params JObject?[] fallbacks, string[]? ignoreKeys = null)
+        public static JObject FallbacksWithIgnoreKeys(JObject master, string[]? ignoreKeys, params JObject?[] fallbacks)
         {
             foreach (var fallback in fallbacks)
             {

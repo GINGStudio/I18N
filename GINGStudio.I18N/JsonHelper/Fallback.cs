@@ -1,15 +1,17 @@
+using System.Linq;
 using Newtonsoft.Json.Linq;
 
 namespace GINGStudio.I18N
 {
     public partial class JsonHelper
     {
-        public static JObject Fallback(JObject master, JObject fallback)
+        public static JObject Fallback(JObject master, JObject fallback, string[]? ignoreKeys = null)
         {
             var rst = master;
             foreach (var (key, value) in fallback)
             {
                 if (value == null) continue;
+                if (ignoreKeys != null && ignoreKeys.Contains(key)) continue;
                 if (value.Type == JTokenType.Null || value.Type == JTokenType.Comment) continue;
 
                 if (!master.ContainsKey(key))
@@ -42,12 +44,12 @@ namespace GINGStudio.I18N
             return rst;
         }
 
-        public static JObject Fallbacks(JObject master, params JObject?[] fallbacks)
+        public static JObject Fallbacks(JObject master, params JObject?[] fallbacks, string[]? ignoreKeys = null)
         {
             foreach (var fallback in fallbacks)
             {
                 if (fallback == null) continue;
-                master = Fallback(master, fallback);
+                master = Fallback(master, fallback, ignoreKeys);
             }
             return master;
         }

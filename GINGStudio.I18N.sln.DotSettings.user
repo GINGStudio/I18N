@@ -4,5 +4,6 @@
     &lt;TestId&gt;MSTest::BDBB76AE-8164-4FCE-903F-0A3FAEAB3DA2::net6.0::GINGStudio.I18N.Test.JsonFallbackTest.TestFallback&lt;/TestId&gt;
     &lt;TestId&gt;MSTest::BDBB76AE-8164-4FCE-903F-0A3FAEAB3DA2::net6.0::GINGStudio.I18N.Test.JsonFallbackTest.TestFallback2&lt;/TestId&gt;
     &lt;TestId&gt;MSTest::BDBB76AE-8164-4FCE-903F-0A3FAEAB3DA2::net6.0::GINGStudio.I18N.Test.JsonFallbackTest.TestFallback3&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::BDBB76AE-8164-4FCE-903F-0A3FAEAB3DA2::net6.0::GINGStudio.I18N.Test.JsonTest.Test&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

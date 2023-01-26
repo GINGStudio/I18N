@@ -4,10 +4,10 @@ using GINGStudio.I18N.Util;
 
 namespace GINGStudio.I18N
 {
-    public class Translator<T>
+    public class Translator<T> where T : class
     {
-        private string? _currentLang;
-        private T Value;
+        private string? _lang;
+        private T? _value;
         private readonly string _path;
         private readonly ConcurrentDictionary<string, T> _cache = new ConcurrentDictionary<string, T>();
 
@@ -16,10 +16,10 @@ namespace GINGStudio.I18N
 
         private bool LoadLanguage()
         {
-            var lang = CurrentLang;
+            var lang = Language;
             if (_cache.ContainsKey(lang))
             {
-                Value = _cache[lang];
+                _value = _cache[lang];
                 return true;
             }
 
@@ -28,30 +28,30 @@ namespace GINGStudio.I18N
             var rst = JsonHelper.DeserialiseTo<T>(File.ReadAllText(path));
             if (!rst.Ok) return false;
 
-            Value = rst.Unwrap();
-            _cache.TryAdd(lang, Value);
+            _value = rst.Unwrap();
+            _cache.TryAdd(lang, _value);
             return true;
         }
 
-        private void SetLanguage(string lang = "")
+        private void UpdateLanguage(string lang = "")
         {
             if (lang == "") lang = SysInfo.Language;
 
-            if (_currentLang == lang) return;
+            if (_lang == lang) return;
             var x = SysInfo.ParseToLanguage(lang);
             if (x == null) return;
-            _currentLang = lang;
+            _lang = lang;
             LoadLanguage();
         }
 
-        public string CurrentLang
+        public string Language
         {
             get
             {
-                if (string.IsNullOrEmpty(_currentLang)) SetLanguage();
-                return _currentLang;
+                if (string.IsNullOrEmpty(_lang)) UpdateLanguage();
+                return _lang!;
             }
-            set => SetLanguage(value);
+            set => UpdateLanguage(value);
         }
 
         public Translator(string path = "i18n")

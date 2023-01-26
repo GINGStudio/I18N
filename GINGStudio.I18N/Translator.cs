@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.IO;
 using GINGStudio.I18N.Util;
+using Newtonsoft.Json.Linq;
 
 namespace GINGStudio.I18N
 {
@@ -10,9 +11,23 @@ namespace GINGStudio.I18N
         private T? _value;
         private readonly string _path;
         private readonly ConcurrentDictionary<string, T> _cache = new ConcurrentDictionary<string, T>();
+        
+        private readonly ConcurrentDictionary<string, JObject> _plainJObjectCache =
+            new ConcurrentDictionary<string, JObject>();
 
         private string GetLangPath(string lang)
             => Path.Join(_path, lang + ".json");
+
+        private JObject? GetPlainLanguage(string lang)
+        {
+            if (_plainJObjectCache.ContainsKey(lang))
+                return _plainJObjectCache[lang];
+            var path = GetLangPath(lang);
+            if (!File.Exists(path)) return null;
+            var jo = JObject.Parse(File.ReadAllText(path));
+            _plainJObjectCache.TryAdd(lang, jo);
+            return jo;
+        }
 
         private bool LoadLanguage()
         {
@@ -23,9 +38,10 @@ namespace GINGStudio.I18N
                 return true;
             }
 
-            var path = GetLangPath(lang);
-            if (!File.Exists(path)) return false;
-            var rst = JsonHelper.DeserialiseTo<T>(File.ReadAllText(path));
+            var langJo = GetPlainLanguage(lang);
+            if (langJo == null) return false;
+            
+            var rst = JsonHelper.DeserialiseTo<T>(langJo);
             if (!rst.Ok) return false;
 
             _value = rst.Unwrap();

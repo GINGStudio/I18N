@@ -6,17 +6,16 @@ namespace GINGStudio.I18N.Test;
 [TestClass]
 public class JsonTest
 {
-    private class LanguageModel
+    private class LanguageModel : Model.LanguageModel
     {
         public string Name { get; set; }
         public string Age { get; set; }
         public string Ability { get; set; }
-        public Configure _config { get; set; }
     }
 
 
     private const string PATH = "i18n";
-    private readonly Translator<LanguageModel> tr;
+    private readonly Translator<LanguageModel> _tr;
 
     private string Json<T>(T v) => JsonConvert.SerializeObject(v, Formatting.Indented);
 
@@ -28,7 +27,7 @@ public class JsonTest
         {
             Name = "姓名",
             Age = "年龄",
-            _config = new Configure()
+            _Config = new Configure()
             {
                 Fallback = new[] { "en" }
             }
@@ -51,18 +50,18 @@ public class JsonTest
     public JsonTest()
     {
         Setup();
-        tr = new Translator<LanguageModel>(PATH);
+        _tr = new Translator<LanguageModel>(PATH);
     }
 
     [TestMethod]
     public void Test()
     {
-        Assert.AreEqual("Name", tr.Text.Name);
-        Assert.AreEqual("Age", tr.Text.Age);
-        Assert.AreEqual("Ability", tr.Text.Ability);
-        tr.Language = "zh-cn";
-        Assert.AreEqual("姓名", tr.Text.Name);
-        Assert.AreEqual("年龄", tr.Text.Age);
-        Assert.AreEqual("Ability", tr.Text.Ability);
+        Assert.AreEqual("Name", _tr.Text.Name);
+        Assert.AreEqual("Age", _tr.Text.Age);
+        Assert.AreEqual("Ability", _tr.Text.Ability);
+        _tr.Language = "zh-cn";
+        Assert.AreEqual("姓名", _tr.Text.Name);
+        Assert.AreEqual("年龄", _tr.Text.Age);
+        Assert.AreEqual("Ability", _tr.Text.Ability);
     }
 }

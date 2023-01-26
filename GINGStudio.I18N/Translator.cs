@@ -99,7 +99,7 @@ namespace GINGStudio.I18N
         public Translator(string path = "i18n")
         {
             _path = path;
-           
+           LoadDefaultConfig();
         }
 
         private void LoadDefaultConfig()

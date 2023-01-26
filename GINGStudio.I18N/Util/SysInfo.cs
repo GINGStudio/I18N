@@ -15,6 +15,8 @@ namespace GINGStudio.I18N.Util
         {
             try
             {
+                lang = lang.ToLower();
+                if (lang == "auto" || lang == "local" || lang == "") return Language;
                 return new System.Globalization.CultureInfo(lang).Name.ToLower();
             }
             catch

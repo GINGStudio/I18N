@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GINGStudio.I18N", "GINGStudio.I18N\GINGStudio.I18N.csproj", "{B00DC8CE-91CC-4161-B596-DCF17BB81CE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GINStudio.I18N.Serialiser.Json", "GINStudio.I18N.Serialiser.Json\GINStudio.I18N.Serialiser.Json.csproj", "{39DC23A7-DF2E-429D-9CFE-15CAA35CA6C7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,9 +12,5 @@ Global
 		{B00DC8CE-91CC-4161-B596-DCF17BB81CE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B00DC8CE-91CC-4161-B596-DCF17BB81CE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B00DC8CE-91CC-4161-B596-DCF17BB81CE2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{39DC23A7-DF2E-429D-9CFE-15CAA35CA6C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39DC23A7-DF2E-429D-9CFE-15CAA35CA6C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39DC23A7-DF2E-429D-9CFE-15CAA35CA6C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39DC23A7-DF2E-429D-9CFE-15CAA35CA6C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

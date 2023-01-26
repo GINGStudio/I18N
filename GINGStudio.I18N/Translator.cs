@@ -12,10 +12,14 @@ namespace GINGStudio.I18N
         private string? _lang;
         private T? _value;
         private readonly string _path;
+        private string _defaultLang = "";
         private readonly ConcurrentDictionary<string, T> _cache = new ConcurrentDictionary<string, T>();
 
         private readonly ConcurrentDictionary<string, JObject> _plainJObjectCache =
             new ConcurrentDictionary<string, JObject>();
+        
+        public bool HasDefaultLang => _defaultLang != "";
+        public string DefaultLang => _defaultLang;
 
         private string GetLangPath(string lang)
             => Path.Join(_path, lang + ".json");
@@ -43,9 +47,11 @@ namespace GINGStudio.I18N
             var cfgRst = JsonHelper.DeserialiseTo<Configure>(cfgJo);
             if (!cfgRst.Ok) return jo;
             var cfg = cfgRst.Unwrap();
-            if (cfg.Fallback == null || cfg.Fallback.Length == 0) return jo;
+            var fallback = cfg.Fallback;
+            if (HasDefaultLang) fallback = fallback.Append(_defaultLang).ToArray();
+            if (fallback == null || fallback.Length == 0) return jo;
             return JsonHelper.FallbacksWithIgnoreKeys(jo, _jsonKeywords,
-                cfg.Fallback.Select(x => GetPlainLanguage(SysInfo.ParseToLanguage(x))).ToArray());
+                fallback.Select(x => GetPlainLanguage(SysInfo.ParseToLanguage(x))).ToArray());
         }
 
         private bool LoadLanguage()
@@ -93,6 +99,16 @@ namespace GINGStudio.I18N
         public Translator(string path = "i18n")
         {
             _path = path;
+           
+        }
+
+        private void LoadDefaultConfig()
+        {
+            var defaultPath = Path.Join(_path, "default.json");
+            if (!File.Exists(defaultPath)) return;
+            var dft = JsonHelper.DeserialiseTo<Default>(File.ReadAllText(defaultPath));
+            if (!dft.Ok) return;
+            _defaultLang = dft.Unwrap().Language ?? "";
         }
     }
 }

@@ -8,9 +8,9 @@ public class JsonTest
 {
     private class LanguageModel : Model.LanguageModel
     {
-        public string Name { get; set; }
-        public string Age { get; set; }
-        public string Ability { get; set; }
+        public string? Name { get; set; }
+        public string? Age { get; set; }
+        public string? Ability { get; set; }
     }
 
 
@@ -57,7 +57,6 @@ public class JsonTest
     public void Test()
     {
         Console.WriteLine(_tr.Language);
-        Console.WriteLine(_tr.Text == null);
         Assert.AreEqual("Name", _tr.Text.Name);
         Assert.AreEqual("Age", _tr.Text.Age);
         Assert.AreEqual("Ability", _tr.Text.Ability);

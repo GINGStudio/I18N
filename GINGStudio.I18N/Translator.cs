@@ -21,7 +21,7 @@ namespace GINGStudio.I18N
             {
                 if (_value != null) return _value;
                 LoadLanguage();
-                return _value!;
+                return _value;
             }
         }
 
@@ -103,7 +103,7 @@ namespace GINGStudio.I18N
             get
             {
                 if (string.IsNullOrEmpty(_lang)) UpdateLanguage();
-                return _lang!;
+                return _lang;
             }
             set => UpdateLanguage(value);
         }

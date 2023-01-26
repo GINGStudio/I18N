@@ -87,6 +87,8 @@ namespace GINGStudio.I18N
         private void UpdateLanguage(string lang = "")
         {
             if (lang == "") lang = SysInfo.Language;
+            if (lang == "") lang = _defaultLang;
+            if (lang == "") lang = "en-gb";
 
             if (_lang == lang) return;
             var x = SysInfo.ParseToLanguage(lang);

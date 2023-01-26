@@ -56,6 +56,8 @@ public class JsonTest
     [TestMethod]
     public void Test()
     {
+        Console.WriteLine(_tr.Language);
+        Console.WriteLine(_tr.Text == null);
         Assert.AreEqual("Name", _tr.Text.Name);
         Assert.AreEqual("Age", _tr.Text.Age);
         Assert.AreEqual("Ability", _tr.Text.Ability);

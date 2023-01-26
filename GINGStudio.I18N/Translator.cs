@@ -127,5 +127,7 @@ namespace GINGStudio.I18N
             if (!dft.Ok) return;
             _defaultLang = dft.Unwrap().Language ?? "";
         }
+        
+        public string[] SupportedLanguages => _source.SupportedLanguages;
     }
 }

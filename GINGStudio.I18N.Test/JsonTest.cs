@@ -54,7 +54,7 @@ public class JsonTest
     }
 
     [TestMethod]
-    public void Test()
+    public void TestMigrate()
     {
         Console.WriteLine(_tr.Language);
         Assert.AreEqual("Name", _tr.Text.Name);
@@ -64,5 +64,15 @@ public class JsonTest
         Assert.AreEqual("姓名", _tr.Text.Name);
         Assert.AreEqual("年龄", _tr.Text.Age);
         Assert.AreEqual("Ability", _tr.Text.Ability);
+    }
+
+
+    [TestMethod]
+    public void TestSupportedLanguage()
+    {
+        var langs = _tr.SupportedLanguages;
+        Assert.AreEqual(2, langs.Length);
+        Assert.IsTrue(langs.Contains("zh-cn"));
+        Assert.IsTrue(langs.Contains("en-gb"));
     }
 }

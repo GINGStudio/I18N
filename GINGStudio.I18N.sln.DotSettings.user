@@ -1,0 +1,8 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2de86853_002De65f_002D4aed_002Db629_002Ded0558e3f096/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestFallback" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;MSTest::BDBB76AE-8164-4FCE-903F-0A3FAEAB3DA2::net6.0::GINGStudio.I18N.Test.JsonFallbackTest.TestFallback&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::BDBB76AE-8164-4FCE-903F-0A3FAEAB3DA2::net6.0::GINGStudio.I18N.Test.JsonFallbackTest.TestFallback2&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::BDBB76AE-8164-4FCE-903F-0A3FAEAB3DA2::net6.0::GINGStudio.I18N.Test.JsonFallbackTest.TestFallback3&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

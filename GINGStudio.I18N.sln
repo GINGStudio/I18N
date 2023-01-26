@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GINGStudio.I18N", "GINGStudio.I18N\GINGStudio.I18N.csproj", "{B00DC8CE-91CC-4161-B596-DCF17BB81CE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GINGStudio.I18N.Test", "GINGStudio.I18N.Test\GINGStudio.I18N.Test.csproj", "{BDBB76AE-8164-4FCE-903F-0A3FAEAB3DA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{B00DC8CE-91CC-4161-B596-DCF17BB81CE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B00DC8CE-91CC-4161-B596-DCF17BB81CE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B00DC8CE-91CC-4161-B596-DCF17BB81CE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDBB76AE-8164-4FCE-903F-0A3FAEAB3DA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDBB76AE-8164-4FCE-903F-0A3FAEAB3DA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDBB76AE-8164-4FCE-903F-0A3FAEAB3DA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDBB76AE-8164-4FCE-903F-0A3FAEAB3DA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

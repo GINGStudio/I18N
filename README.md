@@ -11,6 +11,45 @@ and similar data structure to storage language models, which could be quite unef
 due to `Hash Collision`. Therefore, we tried to use Serialization to handle such scenes
 which will make all access would be `O(1)`.
 
+## Usage
+
+File:
+
+```
+Project File
+├── i18n
+│   ├── default.json
+│   ├── en-gb.json
+│   └── en-us.json
+└── other files
+```
+
+Model:
+
+```csharp
+class LangModel
+{
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public ItemDetail ItemDetail { get; set; }
+    class ItemDetail
+    {
+        public string ItemName { get; set; }
+    }
+}
+```
+
+Load language file:
+
+```csharp
+var tr = new Translator<LangModel>("i18n"); // all translate files are in i18n folder
+tr.Language = "en-gb";                      // set language to en-gb
+tr.AutoSetLanguage();                       // auto set language to current system language
+// Some code
+var item = new Item();
+item.Name = tr.Text.ItemDetail.ItemName;    // get item name
+```
+
 ## Configure
 
 We use a special JObject `_config` to declare the configuire pairs.

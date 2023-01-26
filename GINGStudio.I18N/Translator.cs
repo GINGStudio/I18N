@@ -15,6 +15,16 @@ namespace GINGStudio.I18N
         private string _defaultLang = "";
         private readonly ConcurrentDictionary<string, T> _cache = new ConcurrentDictionary<string, T>();
 
+        public T Text
+        {
+            get
+            {
+                if (_value != null) return _value;
+                LoadLanguage();
+                return _value!;
+            }
+        }
+
         private readonly ConcurrentDictionary<string, JObject> _plainJObjectCache =
             new ConcurrentDictionary<string, JObject>();
         
@@ -37,6 +47,8 @@ namespace GINGStudio.I18N
         }
 
         private readonly string[] _jsonKeywords = { "_config" };
+
+        public void AutoSetLanguage() => UpdateLanguage();
 
         private JObject ApplyConfig(JObject jo)
         {

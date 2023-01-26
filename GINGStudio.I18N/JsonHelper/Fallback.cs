@@ -41,5 +41,15 @@ namespace GINGStudio.I18N
 
             return rst;
         }
+
+        public static JObject Fallbacks(JObject master, params JObject?[] fallbacks)
+        {
+            foreach (var fallback in fallbacks)
+            {
+                if (fallback == null) continue;
+                master = Fallback(master, fallback);
+            }
+            return master;
+        }
     }
 }

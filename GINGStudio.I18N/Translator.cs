@@ -60,7 +60,8 @@ namespace GINGStudio.I18N
             if (!cfgRst.Ok) return jo;
             var cfg = cfgRst.Unwrap();
             var fallback = cfg.Fallback;
-            if (HasDefaultLang) fallback = fallback.Append(_defaultLang).ToArray();
+            if (HasDefaultLang && !fallback.Contains(_defaultLang))
+                fallback = fallback.Append(_defaultLang).ToArray();
             if (fallback == null || fallback.Length == 0) return jo;
             return JsonHelper.FallbacksWithIgnoreKeys(jo, _jsonKeywords,
                 fallback.Select(x => GetPlainLanguage(SysInfo.ParseToLanguage(x))).ToArray());

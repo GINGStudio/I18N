@@ -4,7 +4,7 @@ using GINGStudio.I18N.Util;
 
 namespace GINGStudio.I18N
 {
-    public class Language<T>
+    public class Translator<T>
     {
         private string? _currentLang;
         private T Value;
@@ -54,7 +54,7 @@ namespace GINGStudio.I18N
             set => SetLanguage(value);
         }
 
-        public Language(string path = "i18n")
+        public Translator(string path = "i18n")
         {
             _path = path;
         }

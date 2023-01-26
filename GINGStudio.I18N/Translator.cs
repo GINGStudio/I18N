@@ -20,8 +20,9 @@ namespace GINGStudio.I18N
         private string GetLangPath(string lang)
             => Path.Join(_path, lang + ".json");
 
-        private JObject? GetPlainLanguage(string lang)
+        private JObject? GetPlainLanguage(string? lang)
         {
+            if (lang == null) return null;
             if (_plainJObjectCache.ContainsKey(lang))
                 return _plainJObjectCache[lang];
             var path = GetLangPath(lang);
@@ -44,7 +45,7 @@ namespace GINGStudio.I18N
             var cfg = cfgRst.Unwrap();
             if (cfg.Fallback == null || cfg.Fallback.Length == 0) return jo;
             return JsonHelper.FallbacksWithIgnoreKeys(jo, _jsonKeywords,
-                _jsonKeywords.Select(GetPlainLanguage).ToArray());
+                cfg.Fallback.Select(x => GetPlainLanguage(SysInfo.ParseToLanguage(x))).ToArray());
         }
 
         private bool LoadLanguage()

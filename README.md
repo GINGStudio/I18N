@@ -30,6 +30,14 @@ We use a special JObject `_config` to declare the configuire pairs.
 We support Chain-kind fallback. I.e., you can fallback to as many languages as you want.
 Although it is not quite be recommand due to potential performance issue.
 
+```
+/* JTokens */
+"_config": {
+    "fallback": [ "en-gb", "en-us" ]
+}
+/* JTokens */
+```
+
 ## License
 
 MIT

@@ -67,8 +67,8 @@ We use a special JObject `_config` to declare the configuire pairs.
 
 ## Fallback
 
-We support Chain-kind fallback. I.e., you can fallback to as many languages as you want.
-Although it is not quite be recommand due to potential performance issue.
+We support chain-style fallback. I.e., you can fallback to as many languages as you want.
+Although it is not quite recommand due to potential performance issue.
 
 ```json
 /* JTokens */
@@ -77,6 +77,14 @@ Although it is not quite be recommand due to potential performance issue.
 }
 /* JTokens */
 ```
+
+## Cache
+
+`GINGStudio.I18N` would lazy-load all needed language resources and keep them in `Cache`
+data structure for faster language switch. However, to a large language model, it could
+cost plenty memory. If you want, you can try set `AutoClear = true`, this will free all
+cache when language model is loaded successfully but would significantly increase the
+next language model loading time.
 
 ## License
 

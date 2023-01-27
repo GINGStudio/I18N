@@ -82,9 +82,11 @@ Although it is not quite recommand due to potential performance issue.
 
 `GINGStudio.I18N` would lazy-load all needed language resources and keep them in `Cache`
 data structure for faster language switch. However, to a large language model, it could
-cost plenty memory. If you want, you can try set `AutoClear = true`, this will free all
-cache when language model is loaded successfully but would significantly increase the
-next language model loading time.
+cost plenty memory. If you want, you can try set `tr.AutoClearCache = true`, this will
+free all cache when language model is loaded successfully but would significantly increase
+the next language model loading time.
+
+You can also clear cache manually by `tr.ClearCache()` method.
 
 ## License
 

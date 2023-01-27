@@ -9,3 +9,6 @@ riderModule.iml
 .idea/
 .fleet/
 .DS_Store
+
+*.DotSettings.use
+global.json

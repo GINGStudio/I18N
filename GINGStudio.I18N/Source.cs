@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+// ReSharper disable RedundantDefaultMemberInitializer
 
 namespace GINGStudio.I18N
 {

@@ -2,6 +2,7 @@ using System;
 using GINGStudio.I18N.Util;
 using Newtonsoft.Json.Linq;
 
+// ReSharper disable once CheckNamespace
 namespace GINGStudio.I18N
 {
     public partial class JsonHelper

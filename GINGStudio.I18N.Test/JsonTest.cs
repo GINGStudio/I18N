@@ -1,6 +1,7 @@
 using GINGStudio.I18N.Model;
 using GINGStudio.I18N.Util;
 using Newtonsoft.Json;
+// ReSharper disable RedundantArgumentDefaultValue
 
 namespace GINGStudio.I18N.Test;
 

@@ -3,6 +3,7 @@ using System.Linq;
 using GINGStudio.I18N.Model;
 using GINGStudio.I18N.Util;
 using Newtonsoft.Json.Linq;
+// ReSharper disable RedundantDefaultMemberInitializer
 
 namespace GINGStudio.I18N
 {
@@ -74,6 +75,7 @@ namespace GINGStudio.I18N
                 fallback.Select(x => GetPlainLanguage(SysInfo.ParseToLanguage(x))).ToArray());
         }
 
+        // ReSharper disable once UnusedMethodReturnValue.Local
         private bool LoadLanguage()
         {
             var lang = Language;

@@ -1,5 +1,3 @@
-using System;
-
 namespace GINGStudio.I18N.Util
 {
     internal static class SysInfo

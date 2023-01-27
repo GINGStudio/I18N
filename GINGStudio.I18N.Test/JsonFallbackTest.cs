@@ -12,8 +12,8 @@ public class JsonFallbackTest
         var j2 = @"{""name"": ""XX"",""X"": ""GING Studio""}";
         // conv j1 to JObject
         // conv j2 to JObject
-        var jo1 = JObject.Parse(j1)!;
-        var jo2 = JObject.Parse(j2)!;
+        var jo1 = JObject.Parse(j1);
+        var jo2 = JObject.Parse(j2);
         var jo3 = JsonHelper.Fallback(jo1, jo2);
         Console.WriteLine(jo3.ToString());
         Assert.AreEqual(jo3["name"], jo1["name"]);
@@ -27,8 +27,8 @@ public class JsonFallbackTest
         var j2 = @"{""name"": ""XX"", ""X"": { ""v"": ""GING Studio""} }";
         // conv j1 to JObject
         // conv j2 to JObject
-        var jo1 = JObject.Parse(j1)!;
-        var jo2 = JObject.Parse(j2)!;
+        var jo1 = JObject.Parse(j1);
+        var jo2 = JObject.Parse(j2);
         var jo3 = JsonHelper.Fallback(jo1, jo2);
         Console.WriteLine(jo3.ToString());
         Assert.AreEqual(jo3["name"], jo1["name"]);
@@ -46,8 +46,8 @@ public class JsonFallbackTest
         var j2 = @"{""name"": ""XX"", ""X"": { ""v"": ""GING Studio""} }";
         // conv j1 to JObject
         // conv j2 to JObject
-        var jo1 = JObject.Parse(j1)!;
-        var jo2 = JObject.Parse(j2)!;
+        var jo1 = JObject.Parse(j1);
+        var jo2 = JObject.Parse(j2);
         var jo3 = JsonHelper.Fallback(jo1, jo2);
         Console.WriteLine(jo3.ToString());
         Assert.AreEqual(jo3["name"], jo1["name"]);

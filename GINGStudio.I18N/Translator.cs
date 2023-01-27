@@ -13,6 +13,17 @@ namespace GINGStudio.I18N
         private ISource _source;
         private string _defaultLang = "";
         private readonly ConcurrentDictionary<string, T> _cache = new ConcurrentDictionary<string, T>();
+        private bool _autoClearCache = false;
+        public bool AutoClearCache
+        {
+            get => _autoClearCache;
+            set
+            {
+                if (_autoClearCache == value) return;
+                _autoClearCache = value;
+                if (value) ClearCache();
+            }
+        }
 
         public T Text
         {
@@ -80,7 +91,9 @@ namespace GINGStudio.I18N
             if (!rst.Ok) return false;
 
             _value = rst.Unwrap();
-            _cache.TryAdd(lang, _value);
+           
+            if (!_autoClearCache)  _cache.TryAdd(lang, _value);
+            else ClearCache();
             return true;
         }
 

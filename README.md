@@ -1,8 +1,6 @@
 # GINGStudio.I18N
 
-> Current under working.
-
-Yet Another Internationalisation Library.
+Yet Another Internationalisation Library. *Unity supported*.
 
 ## Why?
 
@@ -87,6 +85,15 @@ free all cache when language model is loaded successfully but would significantl
 the next language model loading time.
 
 You can also clear cache manually by `tr.ClearCache()` method.
+
+## Unity
+
+Yea, this library supports Unity cuz it uses `Newtonsoft.Json` instead of `System.Text.Json`.
+
+To import this library in Unity, you should not compile the project into `dll`. Instead,
+move the `GINGStudio.I18N` directory to your Unity `Assets` folder. This will allows the
+library uses Unity's `Newtonsoft.Json` distribution which is able to work fine under AOT
+(IL2Cpp) environment. (Seems there is no **official** AOT support from Newtonsoft)
 
 ## License
 
